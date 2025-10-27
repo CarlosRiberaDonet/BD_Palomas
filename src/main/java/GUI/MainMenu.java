@@ -4,8 +4,11 @@
  */
 package GUI;
 
-import GUI.NuevaPanel;
+import Controller.PalomaController;
+import DAO.PalomaDAO;
+import Domain.Paloma;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 
@@ -21,7 +24,8 @@ public class MainMenu extends javax.swing.JFrame {
     
     public MainMenu() {
         initComponents();
-       
+        setLocationRelativeTo(null);
+
     }
 
     /**
@@ -48,28 +52,38 @@ public class MainMenu extends javax.swing.JFrame {
         });
 
         buscarButton.setText("Buscar");
+        buscarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarButtonActionPerformed(evt);
+            }
+        });
 
         listarButton.setText("Listar");
 
         exitButton.setText("Salir");
+        exitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(170, 170, 170)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(exitButton)
-                    .addComponent(listarButton)
-                    .addComponent(buscarButton)
-                    .addComponent(nuevaButton))
+                .addGap(151, 151, 151)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(listarButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(exitButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buscarButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(nuevaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(158, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addGap(57, 57, 57)
                 .addComponent(nuevaButton)
                 .addGap(18, 18, 18)
                 .addComponent(buscarButton)
@@ -77,7 +91,7 @@ public class MainMenu extends javax.swing.JFrame {
                 .addComponent(listarButton)
                 .addGap(18, 18, 18)
                 .addComponent(exitButton)
-                .addContainerGap(125, Short.MAX_VALUE))
+                .addContainerGap(97, Short.MAX_VALUE))
         );
 
         pack();
@@ -85,12 +99,29 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void nuevaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevaButtonActionPerformed
         JDialog dialog = new JDialog(this, "Alta de Paloma", true); // true = modal
-        NuevaPanel panel = new NuevaPanel();
+        AltaPalomaPanel panel = new AltaPalomaPanel();
         dialog.getContentPane().add(panel);
         dialog.pack();          // ajusta al tamaño del panel
         dialog.setLocationRelativeTo(this); // centra sobre el frame principal
         dialog.setVisible(true);
     }//GEN-LAST:event_nuevaButtonActionPerformed
+
+    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
+        dispose();
+    }//GEN-LAST:event_exitButtonActionPerformed
+
+    private void buscarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarButtonActionPerformed
+        String anilla = JOptionPane.showInputDialog(this, "Ingrese el número de anilla:");
+        if (anilla != null && !anilla.trim().isEmpty()) {
+            // Llamas a tu método para buscar la paloma
+            Paloma paloma = PalomaController.buscarPaloma(anilla);
+            if (paloma != null) {
+                // Mostrar datos de la paloma en tu panel o formulario
+            } else {
+                JOptionPane.showMessageDialog(this, "No se encontró la paloma con esa anilla.");
+            }
+        }
+    }//GEN-LAST:event_buscarButtonActionPerformed
 
     /**
      * @param args the command line arguments

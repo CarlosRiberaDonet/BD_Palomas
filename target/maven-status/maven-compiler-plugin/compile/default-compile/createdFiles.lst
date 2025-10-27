@@ -10,5 +10,7 @@ GUI\MainMenu$1.class
 Domain\ParejaPaloma.class
 BD_Palomas.class
 GUI\MainMenu$2.class
+GUI\AltaPalomaPanel.class
+GUI\AltaPalomaPanel$1.class
 Domain\Paloma.class
-GUI\NuevaPanel.class
+GUI\MainMenu$3.class
