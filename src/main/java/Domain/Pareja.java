@@ -4,7 +4,7 @@
  */
 package Domain;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 /**
  *
@@ -13,8 +13,8 @@ import java.sql.Date;
 public class Pareja {
     
     private int idPareja;
-    private Date fechaUnion;
-    private Date fechaSeparacion;
+    private LocalDate fechaUnion;
+    private LocalDate fechaSeparacion;
     
     // GETTERS Y SETTERS
 
@@ -26,19 +26,19 @@ public class Pareja {
         this.idPareja = idPareja;
     }
 
-    public Date getFechaUnion() {
+    public LocalDate getFechaUnion() {
         return fechaUnion;
     }
 
-    public void setFechaUnion(Date fechaUnion) {
+    public void setFechaUnion(LocalDate fechaUnion) {
         this.fechaUnion = fechaUnion;
     }
 
-    public Date getFechaSeparacion() {
+    public LocalDate getFechaSeparacion() {
         return fechaSeparacion;
     }
 
-    public void setFechaSeparacion(Date fechaSeparacion) {
+    public void setFechaSeparacion(LocalDate fechaSeparacion) {
         this.fechaSeparacion = fechaSeparacion;
     }
     

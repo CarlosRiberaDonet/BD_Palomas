@@ -1,5 +1,6 @@
 Controller\PalomaController.class
 DAO\PalomaDAO.class
+GUI\MainMenu$4.class
 DAO\ConexionBD.class
 GUI\MainMenu.class
 Domain\Pareja.class
@@ -7,9 +8,11 @@ Domain\Competicion.class
 Utils\Utils.class
 Domain\Cria.class
 GUI\MainMenu$1.class
+GUI\PalomaDetallePanel.class
 Domain\ParejaPaloma.class
 BD_Palomas.class
 GUI\MainMenu$2.class
+GUI\PalomaDetallePanel$1.class
 GUI\AltaPalomaPanel.class
 GUI\AltaPalomaPanel$1.class
 Domain\Paloma.class

@@ -4,7 +4,11 @@
  */
 package GUI;
 
+import Controller.PalomaController;
 import Domain.Paloma;
+import Domain.Pareja;
+import javax.swing.JDialog;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -20,6 +24,7 @@ public class PalomaDetallePanel extends javax.swing.JPanel {
     public PalomaDetallePanel(Paloma paloma) {
         initComponents();
         this.paloma = paloma;
+        cargarDatosPaloma(paloma);
     }
 
     /**
@@ -82,9 +87,16 @@ public class PalomaDetallePanel extends javax.swing.JPanel {
         arbolButton.setText("ARBOL");
 
         salirButton.setText("SALIR");
+        salirButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salirButtonActionPerformed(evt);
+            }
+        });
 
+        buttonGroup1.add(machoRadioButton);
         machoRadioButton.setText("MACHO");
 
+        buttonGroup1.add(hembraRadioButton);
         hembraRadioButton.setText("HEMBRA");
 
         jLabel7.setText("PAREJA ACTUAL:");
@@ -182,17 +194,34 @@ public class PalomaDetallePanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void salirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirButtonActionPerformed
+        JDialog dialog = (JDialog) SwingUtilities.getWindowAncestor(this);
+        dialog.dispose();
+    }//GEN-LAST:event_salirButtonActionPerformed
+
     private static void cargarDatosPaloma(Paloma paloma){
+        anillaTextField.setText(paloma.getAnilla());
+        nombreTextField.setText(paloma.getNombre());
+        colorTextField.setText(paloma.getColor());
+        nacimientoTextField.setText(paloma.getNacimiento().toString());
+        observacionesTextArea.setText(paloma.getObservaciones());
+        if(PalomaController.getGenre(paloma)){
+            machoRadioButton.setSelected(true);
+        } else{
+            hembraRadioButton.setSelected(true);
+        }
         
+        // Puede tener más de una pareja simultaneamente???
+       // Pareja parejaActual = paloma.getParejaList().getLast();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField anillaTextField;
+    private static javax.swing.JTextField anillaTextField;
     private javax.swing.JButton arbolButton;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JTextField colorTextField;
+    private static javax.swing.JTextField colorTextField;
     private javax.swing.JButton eliminarButton;
-    private javax.swing.JRadioButton hembraRadioButton;
+    private static javax.swing.JRadioButton hembraRadioButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -203,12 +232,12 @@ public class PalomaDetallePanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JRadioButton machoRadioButton;
+    private static javax.swing.JRadioButton machoRadioButton;
     private javax.swing.JButton modificarButton;
-    private javax.swing.JTextField nacimientoTextField;
-    private javax.swing.JTextField nombreTextField;
-    private javax.swing.JTextArea observacionesTextArea;
-    private javax.swing.JTextField parejaActualTextField;
+    private static javax.swing.JTextField nacimientoTextField;
+    private static javax.swing.JTextField nombreTextField;
+    private static javax.swing.JTextArea observacionesTextArea;
+    private static javax.swing.JTextField parejaActualTextField;
     private javax.swing.JButton salirButton;
     // End of variables declaration//GEN-END:variables
 }

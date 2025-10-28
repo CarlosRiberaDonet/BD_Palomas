@@ -4,7 +4,7 @@
  */
 package Domain;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 /**
  *
@@ -13,15 +13,19 @@ import java.sql.Date;
 public class Cria {
     
     private int idCria;
-    private Date fechaPuesta;
-    private Date fechaNacimiento;
+    private LocalDate fechaPuesta;
+    private LocalDate fechaNacimiento;
     
     // CONSTRUCTOR
 
-    public Cria(int idCria, Date fechaPuesta, Date fechaNacimiento) {
+    public Cria(int idCria, LocalDate fechaPuesta, LocalDate fechaNacimiento) {
         this.idCria = idCria;
         this.fechaPuesta = fechaPuesta;
         this.fechaNacimiento = fechaNacimiento;
+    }
+    
+    public Cria(){
+        
     }
     
     // GETTERS Y SETTERS
@@ -34,19 +38,19 @@ public class Cria {
         this.idCria = idCria;
     }
 
-    public Date getFechaPuesta() {
+    public LocalDate getFechaPuesta() {
         return fechaPuesta;
     }
 
-    public void setFechaPuesta(Date fechaPuesta) {
+    public void setFechaPuesta(LocalDate fechaPuesta) {
         this.fechaPuesta = fechaPuesta;
     }
 
-    public Date getFechaNacimiento() {
+    public LocalDate getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento) {
+    public void setFechaNacimiento(LocalDate fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 }

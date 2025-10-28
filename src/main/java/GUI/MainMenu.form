@@ -29,9 +29,9 @@
                   <Component id="listarButton" alignment="0" max="32767" attributes="0"/>
                   <Component id="exitButton" alignment="0" max="32767" attributes="0"/>
                   <Component id="buscarButton" alignment="0" max="32767" attributes="0"/>
-                  <Component id="nuevaButton" alignment="0" min="-2" pref="70" max="-2" attributes="0"/>
+                  <Component id="nuevaButton" alignment="0" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="158" max="32767" attributes="0"/>
+              <EmptySpace pref="156" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -54,7 +54,7 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="nuevaButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Nueva"/>
+        <Property name="text" type="java.lang.String" value="NUEVA"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nuevaButtonActionPerformed"/>
@@ -62,7 +62,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="buscarButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Buscar"/>
+        <Property name="text" type="java.lang.String" value="BUSCAR"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buscarButtonActionPerformed"/>
@@ -70,12 +70,12 @@
     </Component>
     <Component class="javax.swing.JButton" name="listarButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Listar"/>
+        <Property name="text" type="java.lang.String" value="LISTAR"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="exitButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Salir"/>
+        <Property name="text" type="java.lang.String" value="SALIR"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="exitButtonActionPerformed"/>

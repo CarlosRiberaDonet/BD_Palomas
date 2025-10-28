@@ -4,7 +4,9 @@
  */
 package Domain;
 
+import java.util.List;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 /**
  *
@@ -16,17 +18,29 @@ public class Paloma {
     private String anilla;
     private String nombre;
     private LocalDate nacimiento;
-    private char sexo;
+    private char genre;
     private String color;
-    private  String observaciones;
+    private String observaciones;
+    private List<Pareja> parejaList= new ArrayList<>();
+    private List<Cria> criaList = new ArrayList<>();
     
     // CONSTRUCTOR
-    
-    public Paloma(String anilla, String nombre, LocalDate nacimiento, char sexo, String color, String observaciones) {
+
+    public Paloma(int idPaloma, String anilla, String nombre, LocalDate nacimiento, char genre, String color, String observaciones) {
+        this.idPaloma = idPaloma;
         this.anilla = anilla;
         this.nombre = nombre;
         this.nacimiento = nacimiento;
-        this.sexo = sexo;
+        this.genre = genre;
+        this.color = color;
+        this.observaciones = observaciones;
+    }
+    
+    public Paloma(String anilla, String nombre, LocalDate nacimiento, char genre, String color, String observaciones) {
+        this.anilla = anilla;
+        this.nombre = nombre;
+        this.nacimiento = nacimiento;
+        this.genre = genre;
         this.color = color;
         this.observaciones = observaciones;
     }
@@ -68,12 +82,12 @@ public class Paloma {
         this.nacimiento = nacimiento;
     }
 
-    public char getSexo() {
-        return sexo;
+    public char getGenre() {
+        return genre;
     }
 
-    public void setSexo(char sexo) {
-        this.sexo = sexo;
+    public void setGenre(char genre) {
+        this.genre = genre;
     }
 
     public String getColor() {
@@ -91,6 +105,25 @@ public class Paloma {
     public void setObservaciones(String observaciones) {
         this.observaciones = observaciones;
     }
-    
-    
+
+    public List<Pareja> getParejaList() {
+        return parejaList;
+    }
+
+    public void setParejaList(List<Pareja> parejaList) {
+        this.parejaList = parejaList;
+    }
+
+    public List<Cria> getCriaList() {
+        return criaList;
+    }
+
+    public void setCriaList(List<Cria> criaList) {
+        this.criaList = criaList;
+    }
+
+    @Override
+    public String toString() {
+        return "Paloma{" + "idPaloma=" + idPaloma + ", anilla=" + anilla + ", nombre=" + nombre + ", nacimiento=" + nacimiento + ", sexo=" + genre + ", color=" + color + ", observaciones=" + observaciones + ", parejaList=" + parejaList + ", criaList=" + criaList + '}';
+    }
 }
