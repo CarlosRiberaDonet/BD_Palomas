@@ -18,6 +18,7 @@ public class Paloma {
     private String anilla;
     private String nombre;
     private LocalDate nacimiento;
+    private LocalDate muerte;
     private char genre;
     private String color;
     private String observaciones;
@@ -26,8 +27,18 @@ public class Paloma {
     
     // CONSTRUCTOR
 
-    public Paloma(int idPaloma, String anilla, String nombre, LocalDate nacimiento, char genre, String color, String observaciones) {
+    public Paloma(int idPaloma, String anilla, String nombre, LocalDate nacimiento, LocalDate muerte, char genre, String color, String observaciones) {
         this.idPaloma = idPaloma;
+        this.anilla = anilla;
+        this.nombre = nombre;
+        this.nacimiento = nacimiento;
+        this.muerte = muerte;
+        this.genre = genre;
+        this.color = color;
+        this.observaciones = observaciones;
+    }
+
+    public Paloma(String anilla, String nombre, LocalDate nacimiento, char genre, String color, String observaciones) {
         this.anilla = anilla;
         this.nombre = nombre;
         this.nacimiento = nacimiento;
@@ -36,10 +47,12 @@ public class Paloma {
         this.observaciones = observaciones;
     }
     
-    public Paloma(String anilla, String nombre, LocalDate nacimiento, char genre, String color, String observaciones) {
+    
+    public Paloma(String anilla, String nombre, LocalDate nacimiento,LocalDate muerte, char genre, String color, String observaciones) {
         this.anilla = anilla;
         this.nombre = nombre;
         this.nacimiento = nacimiento;
+        this.muerte = muerte;
         this.genre = genre;
         this.color = color;
         this.observaciones = observaciones;
@@ -80,6 +93,14 @@ public class Paloma {
 
     public void setNacimiento(LocalDate nacimiento) {
         this.nacimiento = nacimiento;
+    }
+
+    public LocalDate getMuerte() {
+        return muerte;
+    }
+
+    public void setMuerte(LocalDate muerte) {
+        this.muerte = muerte;
     }
 
     public char getGenre() {

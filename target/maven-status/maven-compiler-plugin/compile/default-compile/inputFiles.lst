@@ -6,8 +6,10 @@ C:\Users\Carlos\Documents\NetBeansProjects\BD_Palomas\src\main\java\Controller\P
 C:\Users\Carlos\Documents\NetBeansProjects\BD_Palomas\src\main\java\Domain\Paloma.java
 C:\Users\Carlos\Documents\NetBeansProjects\BD_Palomas\src\main\java\DAO\PalomaDAO.java
 C:\Users\Carlos\Documents\NetBeansProjects\BD_Palomas\src\main\java\GUI\AltaPalomaPanel.java
+C:\Users\Carlos\Documents\NetBeansProjects\BD_Palomas\src\main\java\GUI\ListaPalomasDialog.java
 C:\Users\Carlos\Documents\NetBeansProjects\BD_Palomas\src\main\java\Domain\Pareja.java
 C:\Users\Carlos\Documents\NetBeansProjects\BD_Palomas\src\main\java\GUI\MainMenu.java
 C:\Users\Carlos\Documents\NetBeansProjects\BD_Palomas\src\main\java\Domain\Competicion.java
 C:\Users\Carlos\Documents\NetBeansProjects\BD_Palomas\src\main\java\BD_Palomas.java
+C:\Users\Carlos\Documents\NetBeansProjects\BD_Palomas\src\main\java\Domain\PalomaTableModel.java
 C:\Users\Carlos\Documents\NetBeansProjects\BD_Palomas\src\main\java\GUI\PalomaDetallePanel.java

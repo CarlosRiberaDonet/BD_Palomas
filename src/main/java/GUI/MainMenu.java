@@ -5,7 +5,6 @@
 package GUI;
 
 import Controller.PalomaController;
-import DAO.PalomaDAO;
 import Domain.Paloma;
 import java.util.List;
 import javax.swing.JDialog;
@@ -26,10 +25,10 @@ public class MainMenu extends javax.swing.JFrame {
     public MainMenu() {
         initComponents();
         setLocationRelativeTo(null);
-        List<Paloma> palomasList = PalomaController.getPalomas();
-        for(Paloma p : palomasList){
-            System.out.println("------ \n" + p + "\n ------");
-        }
+//        List<Paloma> palomasList = PalomaController.getPalomas();
+//        for(Paloma p : palomasList){
+//            System.out.println("------ \n" + p + "\n ------");
+//        }
 
     }
 
@@ -64,6 +63,11 @@ public class MainMenu extends javax.swing.JFrame {
         });
 
         listarButton.setText("LISTAR");
+        listarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listarButtonActionPerformed(evt);
+            }
+        });
 
         exitButton.setText("SALIR");
         exitButton.addActionListener(new java.awt.event.ActionListener() {
@@ -138,6 +142,12 @@ public class MainMenu extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_buscarButtonActionPerformed
+
+    private void listarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listarButtonActionPerformed
+        ListaPalomasDialog dialog = new ListaPalomasDialog(this, true); // this = frame principal, true = modal
+        dialog.setLocationRelativeTo(this); // centra el dialog sobre el frame
+        dialog.setVisible(true); // muestra el dialog
+    }//GEN-LAST:event_listarButtonActionPerformed
 
     /**
      * @param args the command line arguments

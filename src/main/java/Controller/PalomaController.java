@@ -14,20 +14,22 @@ import java.util.List;
  */
 public class PalomaController {
     
-    
-    // Obtener todas las palomas
-    public static List<Paloma> getPalomas(){
+    // Obtener todas las palomas de la BD
+    public static List<Paloma> getPalomasList(){
         return PalomaDAO.getPalomasList();
     }
+    
+    // Crear nueva paloma en la BD
     public static boolean nuevaPaloma(Paloma nuevaPaloma){   
         return PalomaDAO.insertPaloma(nuevaPaloma);
-  
     }
     
+    // Eliminar paloma de la BD
     public static boolean eliminarPaloma(String anilla){
         return PalomaDAO.deletePaloma(anilla);
     }
     
+    // Buscar paloma por anilla en la BD
     public static Paloma buscarPaloma(String anilla){
         return PalomaDAO.selectPaloma(anilla);
     }

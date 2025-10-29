@@ -8,7 +8,6 @@ import Domain.Cria;
 import Domain.Paloma;
 import Domain.Pareja;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -30,8 +29,9 @@ public class PalomaDAO {
     
     private static final String SELECT_PALOMA_BY_ANILLA = "SELECT p.id, " +
             "p.anilla, " +
-            "p.nombre ," +
+            "p.nombre, " +
             "p.nacimiento, "+
+            "p.muerte, " +
             "p.sexo, " +
             "p.color, " +
             "p.observaciones, " +
@@ -139,6 +139,11 @@ public class PalomaDAO {
                 paloma.setAnilla(rs.getString("anilla"));
                 paloma.setNombre(rs.getString("nombre"));
                 paloma.setNacimiento(rs.getDate("nacimiento").toLocalDate());
+                if (rs.getDate("muerte") != null) {
+                    paloma.setMuerte(rs.getDate("muerte").toLocalDate());
+                } else{
+                   paloma.setMuerte(null); 
+                }                
                 paloma.setGenre(rs.getString("sexo").charAt(0));
                 paloma.setColor(rs.getString("color"));
                 paloma.setObservaciones(rs.getString("observaciones"));
