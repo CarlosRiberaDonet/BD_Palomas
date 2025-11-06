@@ -19,42 +19,46 @@ public class Paloma {
     private String nombre;
     private LocalDate nacimiento;
     private LocalDate muerte;
-    private char genre;
+    private char sexo;
     private String color;
+    private boolean tipo;
     private String observaciones;
     private List<Pareja> parejaList= new ArrayList<>();
     private List<Cria> criaList = new ArrayList<>();
     
     // CONSTRUCTOR
 
-    public Paloma(int idPaloma, String anilla, String nombre, LocalDate nacimiento, LocalDate muerte, char genre, String color, String observaciones) {
+    public Paloma(int idPaloma, String anilla, String nombre, LocalDate nacimiento, LocalDate muerte, char sexo, String color, boolean tipo, String observaciones) {
         this.idPaloma = idPaloma;
         this.anilla = anilla;
         this.nombre = nombre;
         this.nacimiento = nacimiento;
         this.muerte = muerte;
-        this.genre = genre;
+        this.sexo = sexo;
         this.color = color;
+        this.tipo = tipo;
         this.observaciones = observaciones;
     }
 
-    public Paloma(String anilla, String nombre, LocalDate nacimiento, char genre, String color, String observaciones) {
+    public Paloma(String anilla, String nombre, LocalDate nacimiento, char sexo, String color, boolean tipo, String observaciones) {
         this.anilla = anilla;
         this.nombre = nombre;
         this.nacimiento = nacimiento;
-        this.genre = genre;
+        this.sexo = sexo;
         this.color = color;
+        this.tipo = tipo;
         this.observaciones = observaciones;
     }
     
     
-    public Paloma(String anilla, String nombre, LocalDate nacimiento,LocalDate muerte, char genre, String color, String observaciones) {
+    public Paloma(String anilla, String nombre, LocalDate nacimiento,LocalDate muerte, char sexo, String color, boolean tipo, String observaciones) {
         this.anilla = anilla;
         this.nombre = nombre;
         this.nacimiento = nacimiento;
         this.muerte = muerte;
-        this.genre = genre;
+        this.sexo = sexo;
         this.color = color;
+        this.tipo = tipo;
         this.observaciones = observaciones;
     }
 
@@ -103,16 +107,24 @@ public class Paloma {
         this.muerte = muerte;
     }
 
-    public char getGenre() {
-        return genre;
+    public char getSexo() {
+        return sexo;
     }
 
-    public void setGenre(char genre) {
-        this.genre = genre;
+    public void setSexo(char sexo) {
+        this.sexo = sexo;
     }
 
     public String getColor() {
         return color;
+    }
+
+    public boolean isTipo() {
+        return tipo;
+    }
+
+    public void setTipo(boolean tipo) {
+        this.tipo = tipo;
     }
 
     public void setColor(String color) {
@@ -145,6 +157,18 @@ public class Paloma {
 
     @Override
     public String toString() {
-        return "Paloma{" + "idPaloma=" + idPaloma + ", anilla=" + anilla + ", nombre=" + nombre + ", nacimiento=" + nacimiento + ", sexo=" + genre + ", color=" + color + ", observaciones=" + observaciones + ", parejaList=" + parejaList + ", criaList=" + criaList + '}';
+        return "Paloma: {\n" 
+                + " idPaloma=" + idPaloma + "\n"
+                + " anilla=" + anilla + "\n"
+                + " nombre=" + nombre + "\n"
+                + " nacimiento=" + nacimiento + "\n"
+                + " sexo=" + sexo + "\n"
+                + " color=" + color + "\n"
+                + " tipo=" + tipo + "\n"
+                + " observaciones=" + observaciones + "\n"
+                + " parejaList=" + parejaList + "\n"
+                + " criaList=" + criaList + "\n"
+                + '}';
     }
+
 }

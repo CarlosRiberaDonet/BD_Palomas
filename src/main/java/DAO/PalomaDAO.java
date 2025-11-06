@@ -8,9 +8,11 @@ import Domain.Cria;
 import Domain.Paloma;
 import Domain.Pareja;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,9 +25,12 @@ public class PalomaDAO {
     private static final String GET_PALOMAS = "SELECT * FROM paloma";
     
     private static final String INSERT_PALOMA = "INSERT INTO paloma(anilla, nombre, "
-            + "nacimiento, sexo, color, observaciones) VALUES (?, ?, ?, ?, ?, ?)";
+            + "nacimiento, sexo, color, tipo, observaciones) VALUES (?, ?, ?, ?, ?, ?, ?)";
     
-    private static final String DELETE_PALOMA = "DELETE FROM paloma WHERE anilla = ?";
+    private static final String DELETE_PALOMA = "DELETE FROM paloma WHERE id = ?";
+    
+    private static final String MODIFY_PALOMA = "UPDATE paloma SET anilla = ?, nombre = ?, " +
+                                "nacimiento = ?, muerte = ?, sexo = ?, color = ?, observaciones = ? WHERE id = ?";
     
     private static final String SELECT_PALOMA_BY_ANILLA = "SELECT p.id, " +
             "p.anilla, " +
@@ -70,7 +75,7 @@ public class PalomaDAO {
                 paloma.setAnilla(rs.getString("anilla"));
                 paloma.setNombre(rs.getString("nombre"));
                 paloma.setNacimiento(rs.getDate("nacimiento").toLocalDate());
-                paloma.setGenre(rs.getString("sexo").charAt(0));
+                paloma.setSexo(rs.getString("sexo").charAt(0));
                 paloma.setColor(rs.getString("color"));
                 paloma.setObservaciones(rs.getString("observaciones"));
                 
@@ -93,9 +98,10 @@ public class PalomaDAO {
             stmt.setString(1, paloma.getAnilla());
             stmt.setString(2, paloma.getNombre());
             stmt.setDate(3, java.sql.Date.valueOf(paloma.getNacimiento()));
-            stmt.setString(4, String.valueOf(paloma.getGenre()));
+            stmt.setString(4, String.valueOf(paloma.getSexo()));
             stmt.setString(5, paloma.getColor());
-            stmt.setString(6, paloma.getObservaciones());
+            stmt.setBoolean(6, paloma.isTipo());
+            stmt.setString(7, paloma.getObservaciones());
             
             stmt.execute();
             return true;
@@ -106,12 +112,43 @@ public class PalomaDAO {
         }
     }
     
+    // Modificar datos de una paloma
+    public static boolean modifyPaloma(Paloma paloma){
+        
+        try(Connection conn = ConexionBD.connectionPalomas(); PreparedStatement stmt = conn.prepareStatement(MODIFY_PALOMA)){
+            
+            stmt.setString(1, paloma.getAnilla());
+            stmt.setString(2, paloma.getNombre());
+            stmt.setDate(3, Date.valueOf(paloma.getNacimiento()));
+            if (paloma.getMuerte() != null) {
+                stmt.setDate(4, Date.valueOf(paloma.getMuerte()));
+            } else {
+                stmt.setNull(4, Types.DATE);
+            }
+
+            stmt.setString(5, String.valueOf(paloma.getSexo()));
+            stmt.setString(6, paloma.getColor());
+            stmt.setString(7, paloma.getObservaciones());
+            stmt.setInt(8, paloma.getIdPaloma());
+            
+            int filasAfectadas = stmt.executeUpdate();
+            if(filasAfectadas > 0){
+                return true;
+            }
+            
+        }catch(SQLException e){
+            System.out.println("Error al modificar la paloma");
+            e.printStackTrace();
+        }  
+        return false;
+    }
+    
     // Eliminar paloma de la BD
-    public static boolean deletePaloma(String anilla){
+    public static boolean deletePaloma(int idPaloma){
         
         try(Connection conn = ConexionBD.connectionPalomas(); PreparedStatement stmt = conn.prepareStatement(DELETE_PALOMA)){
             
-            stmt.setString(1, anilla);
+            stmt.setInt(1, idPaloma);
             int filasAfectadas = stmt.executeUpdate();
             
             return filasAfectadas > 0;
@@ -144,7 +181,7 @@ public class PalomaDAO {
                 } else{
                    paloma.setMuerte(null); 
                 }                
-                paloma.setGenre(rs.getString("sexo").charAt(0));
+                paloma.setSexo(rs.getString("sexo").charAt(0));
                 paloma.setColor(rs.getString("color"));
                 paloma.setObservaciones(rs.getString("observaciones"));
                 

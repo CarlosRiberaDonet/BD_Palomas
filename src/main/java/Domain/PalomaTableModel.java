@@ -43,7 +43,7 @@ public class PalomaTableModel extends AbstractTableModel{
             case 1: return p.getNombre().toUpperCase();
             case 2: return p.getNacimiento();
             case 3: return p.getColor().toUpperCase();
-            case 4: return p.getGenre();
+            case 4: return p.getSexo();
             default: return null;
         }
     }

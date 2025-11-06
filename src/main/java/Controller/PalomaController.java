@@ -25,8 +25,8 @@ public class PalomaController {
     }
     
     // Eliminar paloma de la BD
-    public static boolean eliminarPaloma(String anilla){
-        return PalomaDAO.deletePaloma(anilla);
+    public static boolean eliminarPaloma(int idPaloma){
+        return PalomaDAO.deletePaloma(idPaloma);
     }
     
     // Buscar paloma por anilla en la BD
@@ -34,9 +34,14 @@ public class PalomaController {
         return PalomaDAO.selectPaloma(anilla);
     }
     
+    // Modificar datos de paloma
+    public static boolean modificarPaloma(Paloma paloma){
+        return PalomaDAO.modifyPaloma(paloma);
+    }
+    
     // Método para comporbar género de la paloma
    public static boolean getGenre(Paloma paloma){
-       return paloma.getGenre() == 'M'; // Devuelve "True" si es macho, "False" si es hembra
+       return paloma.getSexo() == 'M'; // Devuelve "True" si es macho, "False" si es hembra
    }
    
    // Obtener última pareja

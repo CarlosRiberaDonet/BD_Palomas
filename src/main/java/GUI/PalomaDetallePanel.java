@@ -6,7 +6,10 @@ package GUI;
 
 import Controller.PalomaController;
 import Domain.Paloma;
+import Utils.Utils;
+import java.time.LocalDate;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 /**
@@ -37,6 +40,7 @@ public class PalomaDetallePanel extends javax.swing.JPanel {
 
         jTextField1 = new javax.swing.JTextField();
         buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -55,9 +59,12 @@ public class PalomaDetallePanel extends javax.swing.JPanel {
         colorTextField = new javax.swing.JTextField();
         machoRadioButton = new javax.swing.JRadioButton();
         hembraRadioButton = new javax.swing.JRadioButton();
-        nacimientoTextField = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         parejaActualTextField = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        vueloRadioButton = new javax.swing.JRadioButton();
+        crianzaRadioButton = new javax.swing.JRadioButton();
+        nacimientoDateChooser = new com.toedter.calendar.JDateChooser();
 
         jTextField1.setText("jTextField1");
 
@@ -79,9 +86,19 @@ public class PalomaDetallePanel extends javax.swing.JPanel {
         observacionesTextArea.setRows(5);
         jScrollPane1.setViewportView(observacionesTextArea);
 
-        modificarButton.setText("MODIFICAR");
+        modificarButton.setText("GUARDAR MODIFICACION");
+        modificarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modificarButtonActionPerformed(evt);
+            }
+        });
 
         eliminarButton.setText("ELIMINAR");
+        eliminarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarButtonActionPerformed(evt);
+            }
+        });
 
         arbolButton.setText("ARBOL");
 
@@ -100,6 +117,14 @@ public class PalomaDetallePanel extends javax.swing.JPanel {
 
         jLabel7.setText("PAREJA ACTUAL:");
 
+        jLabel8.setText("TIPO:");
+
+        buttonGroup2.add(vueloRadioButton);
+        vueloRadioButton.setText("VUELO");
+
+        buttonGroup2.add(crianzaRadioButton);
+        crianzaRadioButton.setText("CRIANZA");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -107,40 +132,34 @@ public class PalomaDetallePanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(nacimientoTextField)
-                            .addComponent(anillaTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(anillaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nacimientoDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(43, 43, 43)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(nombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(colorTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE))
+                                .addComponent(nombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(machoRadioButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(hembraRadioButton)
-                                .addGap(18, 18, 18)
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(parejaActualTextField)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(colorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(105, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(modificarButton)
                 .addGap(18, 18, 18)
                 .addComponent(eliminarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -150,8 +169,23 @@ public class PalomaDetallePanel extends javax.swing.JPanel {
                 .addComponent(salirButton, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(113, 113, 113))
             .addGroup(layout.createSequentialGroup()
-                .addGap(242, 242, 242)
-                .addComponent(jLabel6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(242, 242, 242)
+                        .addComponent(jLabel6))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(machoRadioButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(hembraRadioButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(vueloRadioButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(crianzaRadioButton)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -166,15 +200,21 @@ public class PalomaDetallePanel extends javax.swing.JPanel {
                     .addComponent(jLabel5)
                     .addComponent(colorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(jLabel7)
+                        .addComponent(parejaActualTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nacimientoDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(machoRadioButton)
                     .addComponent(hembraRadioButton)
-                    .addComponent(jLabel3)
-                    .addComponent(nacimientoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7)
-                    .addComponent(parejaActualTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
+                    .addComponent(jLabel8)
+                    .addComponent(vueloRadioButton)
+                    .addComponent(crianzaRadioButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -195,27 +235,87 @@ public class PalomaDetallePanel extends javax.swing.JPanel {
         dialog.dispose();
     }//GEN-LAST:event_salirButtonActionPerformed
 
+    private void eliminarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarButtonActionPerformed
+        
+        if(PalomaController.eliminarPaloma(paloma.getIdPaloma())){
+            JOptionPane.showMessageDialog(this, "Paloma con número de anilla " + paloma.getAnilla() + " eliminada.");
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Error al intentar eliminar.");
+        }
+    }//GEN-LAST:event_eliminarButtonActionPerformed
+
+    private void modificarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarButtonActionPerformed
+        
+        if(!Utils.checkField(anillaTextField, 30)){
+            JOptionPane.showMessageDialog(this, "El campo anilla no puede estar vacío ni tener más de 30 caracteres.");
+            return;
+        }
+        
+        String anilla = anillaTextField.getText();
+        String nombre = nombreTextField.getText();
+        LocalDate nacimiento = Utils.checkDateChooser(nacimientoDateChooser);
+        if(nacimiento == null){
+            JOptionPane.showMessageDialog(this, "Debe seleccionar una fecha de nacimiento.");
+            return;
+        }
+        String color = colorTextField.getText(); 
+        boolean tipo = vueloRadioButton.isSelected() ? true : false;
+        
+        String sexoStr = "";
+        if(buttonGroup1.getSelection() == null){
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un sexo.");
+            return;
+        }
+        if(machoRadioButton.isSelected()){
+            sexoStr = "M";
+        } 
+        else if(hembraRadioButton.isSelected()){
+            sexoStr = "H";
+        }
+        char sexo = sexoStr.charAt(0); 
+        String observaciones = observacionesTextArea.getText();
+
+        Paloma nuevaPaloma = new Paloma(anilla, nombre, nacimiento, sexo, color, tipo, observaciones);
+        
+        if(PalomaController.nuevaPaloma(nuevaPaloma)){
+            JOptionPane.showMessageDialog(this,"Paloma con nº de anilla " + anilla + " guardada correctamente.");
+            JDialog dialog = (JDialog) SwingUtilities.getWindowAncestor(this);
+            dialog.dispose();
+        }
+    }//GEN-LAST:event_modificarButtonActionPerformed
+
     private static void cargarDatosPaloma(Paloma paloma){
         anillaTextField.setText(paloma.getAnilla().toUpperCase());
         nombreTextField.setText(paloma.getNombre().toUpperCase());
         colorTextField.setText(paloma.getColor().toUpperCase());
-        nacimientoTextField.setText(paloma.getNacimiento().toString().toUpperCase());
+        nacimientoDateChooser.setDate(java.sql.Date.valueOf(paloma.getNacimiento()));
         observacionesTextArea.setText(paloma.getObservaciones());
         if(PalomaController.getGenre(paloma)){
             machoRadioButton.setSelected(true);
         } else{
             hembraRadioButton.setSelected(true);
         }
+        if(paloma.isTipo()){
+            vueloRadioButton.setSelected(true);
+            
+        } else if(!paloma.isTipo()){
+            crianzaRadioButton.setSelected(false);
+        }
         
-        // Puede tener más de una pareja simultaneamente???
-       // Pareja parejaActual = paloma.getParejaList().getLast();
+////        Pareja parejaActual = paloma.getParejaList().getLast();
+//        int idPareja = parejaActual.getIdPareja();
+//        
+////        parejaActualTextField.setText(parejaActual.getIdPareja());
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private static javax.swing.JTextField anillaTextField;
     private javax.swing.JButton arbolButton;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private static javax.swing.JTextField colorTextField;
+    private static javax.swing.JRadioButton crianzaRadioButton;
     private javax.swing.JButton eliminarButton;
     private static javax.swing.JRadioButton hembraRadioButton;
     private javax.swing.JLabel jLabel1;
@@ -225,15 +325,17 @@ public class PalomaDetallePanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTextField1;
     private static javax.swing.JRadioButton machoRadioButton;
     private javax.swing.JButton modificarButton;
-    private static javax.swing.JTextField nacimientoTextField;
+    private static com.toedter.calendar.JDateChooser nacimientoDateChooser;
     private static javax.swing.JTextField nombreTextField;
     private static javax.swing.JTextArea observacionesTextArea;
     private static javax.swing.JTextField parejaActualTextField;
     private javax.swing.JButton salirButton;
+    private static javax.swing.JRadioButton vueloRadioButton;
     // End of variables declaration//GEN-END:variables
 }

@@ -2,6 +2,7 @@ C:\Users\Carlos\Documents\NetBeansProjects\BD_Palomas\src\main\java\Domain\Cria.
 C:\Users\Carlos\Documents\NetBeansProjects\BD_Palomas\src\main\java\Domain\ParejaPaloma.java
 C:\Users\Carlos\Documents\NetBeansProjects\BD_Palomas\src\main\java\Utils\Utils.java
 C:\Users\Carlos\Documents\NetBeansProjects\BD_Palomas\src\main\java\DAO\ConexionBD.java
+C:\Users\Carlos\Documents\NetBeansProjects\BD_Palomas\src\main\java\Controller\ParejaController.java
 C:\Users\Carlos\Documents\NetBeansProjects\BD_Palomas\src\main\java\Controller\PalomaController.java
 C:\Users\Carlos\Documents\NetBeansProjects\BD_Palomas\src\main\java\Domain\Paloma.java
 C:\Users\Carlos\Documents\NetBeansProjects\BD_Palomas\src\main\java\DAO\PalomaDAO.java
@@ -11,5 +12,6 @@ C:\Users\Carlos\Documents\NetBeansProjects\BD_Palomas\src\main\java\Domain\Parej
 C:\Users\Carlos\Documents\NetBeansProjects\BD_Palomas\src\main\java\GUI\MainMenu.java
 C:\Users\Carlos\Documents\NetBeansProjects\BD_Palomas\src\main\java\Domain\Competicion.java
 C:\Users\Carlos\Documents\NetBeansProjects\BD_Palomas\src\main\java\BD_Palomas.java
+C:\Users\Carlos\Documents\NetBeansProjects\BD_Palomas\src\main\java\DAO\ParejaDAO.java
 C:\Users\Carlos\Documents\NetBeansProjects\BD_Palomas\src\main\java\Domain\PalomaTableModel.java
 C:\Users\Carlos\Documents\NetBeansProjects\BD_Palomas\src\main\java\GUI\PalomaDetallePanel.java

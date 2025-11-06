@@ -7,6 +7,7 @@ package GUI;
 import Controller.PalomaController;
 import Domain.Paloma;
 import Domain.PalomaTableModel;
+import Utils.Utils;
 import java.util.List;
 import javax.swing.JDialog;
 
@@ -40,7 +41,6 @@ public class ListaPalomasDialog extends javax.swing.JDialog {
                 int filaSeleccionada = palomasTable.getSelectedRow();
                 if (filaSeleccionada >= 0) {
                     Paloma paloma = palomasList.get(filaSeleccionada);
-                    // manejar selección
                 }
             }
         });
@@ -142,20 +142,35 @@ public class ListaPalomasDialog extends javax.swing.JDialog {
                 int filaSeleccionada = palomasTable.getSelectedRow();
                 if (filaSeleccionada >= 0) {
                     Paloma paloma = palomasList.get(filaSeleccionada);
-                    
                     String buscarAnilla = paloma.getAnilla();
                     Paloma palomaSelect = PalomaController.buscarPaloma(buscarAnilla);
-                     // Mostrar datos de la paloma
-                JDialog dialog = new JDialog(this, "FICHA", true);
-                PalomaDetallePanel panel = new PalomaDetallePanel(paloma);
-                dialog.getContentPane().add(panel);
-                dialog.pack();
-                dialog.setLocationRelativeTo(this);
-                dialog.setVisible(true);
+
+                    // Mostrar detalles
+                    JDialog dialog = new JDialog(this, "FICHA", true);
+                    PalomaDetallePanel panel = new PalomaDetallePanel(palomaSelect);
+                    dialog.getContentPane().add(panel);
+                    dialog.pack();
+                    dialog.setLocationRelativeTo(this);
+
+                    // Escuchar cierre del diálogo
+                    dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                        @Override
+                        public void windowClosed(java.awt.event.WindowEvent e) {
+                            refrescarTabla();
+                        }
+                    });
+
+                    dialog.setVisible(true);
                 }
             }
         });
     }
+     
+     private void refrescarTabla() {
+        palomasList = PalomaController.getPalomasList();
+        palomasTable.setModel(new PalomaTableModel(palomasList));
+    }
+
      
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane palomasScrollPane;

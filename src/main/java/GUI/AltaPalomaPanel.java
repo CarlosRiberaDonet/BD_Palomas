@@ -35,6 +35,7 @@ public class AltaPalomaPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        tipoButtonGroup = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -51,6 +52,9 @@ public class AltaPalomaPanel extends javax.swing.JPanel {
         hembraRadioButton = new javax.swing.JRadioButton();
         colorTextField = new javax.swing.JTextField();
         guardarButton = new javax.swing.JButton();
+        vueloRadioButton = new javax.swing.JRadioButton();
+        jLabel7 = new javax.swing.JLabel();
+        crianzaRadioButton = new javax.swing.JRadioButton();
 
         jLabel1.setText("ANILLA:");
 
@@ -81,6 +85,14 @@ public class AltaPalomaPanel extends javax.swing.JPanel {
             }
         });
 
+        tipoButtonGroup.add(vueloRadioButton);
+        vueloRadioButton.setText("VUELO");
+
+        jLabel7.setText("TIPO:");
+
+        tipoButtonGroup.add(crianzaRadioButton);
+        crianzaRadioButton.setText("CRIANZA");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -105,7 +117,13 @@ public class AltaPalomaPanel extends javax.swing.JPanel {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel4)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(colorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(colorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(machoRadioButton)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(hembraRadioButton)))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(layout.createSequentialGroup()
@@ -113,16 +131,16 @@ public class AltaPalomaPanel extends javax.swing.JPanel {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(nombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel7)
+                                            .addComponent(jLabel3))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(nacimientoDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(187, 187, 187)
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(machoRadioButton)
-                                .addGap(18, 18, 18)
-                                .addComponent(hembraRadioButton)))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(nacimientoDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(vueloRadioButton)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(crianzaRadioButton)))))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
@@ -145,12 +163,15 @@ public class AltaPalomaPanel extends javax.swing.JPanel {
                     .addComponent(colorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(nacimientoDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addGap(34, 34, 34)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(machoRadioButton)
                     .addComponent(hembraRadioButton)
-                    .addComponent(jLabel5))
-                .addGap(47, 47, 47)
+                    .addComponent(jLabel5)
+                    .addComponent(vueloRadioButton)
+                    .addComponent(jLabel7)
+                    .addComponent(crianzaRadioButton))
+                .addGap(63, 63, 63)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -172,7 +193,13 @@ public class AltaPalomaPanel extends javax.swing.JPanel {
         String anilla = anillaTextField.getText();
         String nombre = nombreTextField.getText();
         LocalDate nacimiento = Utils.checkDateChooser(nacimientoDateChooser);
+        if(nacimiento == null){
+            JOptionPane.showMessageDialog(this, "Debe seleccionar una fecha de nacimiento.");
+            return;
+        }
         String color = colorTextField.getText(); 
+        boolean tipo = vueloRadioButton.isSelected() ? true : false;
+        
         String sexoStr = "";
         if(buttonGroup1.getSelection() == null){
             JOptionPane.showMessageDialog(this, "Debe seleccionar un sexo.");
@@ -187,7 +214,7 @@ public class AltaPalomaPanel extends javax.swing.JPanel {
         char sexo = sexoStr.charAt(0); 
         String observaciones = observacionesTextArea.getText();
 
-        Paloma nuevaPaloma = new Paloma(anilla, nombre, nacimiento, sexo, color, observaciones);
+        Paloma nuevaPaloma = new Paloma(anilla, nombre, nacimiento, sexo, color, tipo, observaciones);
         
         if(PalomaController.nuevaPaloma(nuevaPaloma)){
             JOptionPane.showMessageDialog(this,"Paloma con nº de anilla " + anilla + " guardada correctamente.");
@@ -201,6 +228,7 @@ public class AltaPalomaPanel extends javax.swing.JPanel {
     private javax.swing.JTextField anillaTextField;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JTextField colorTextField;
+    private javax.swing.JRadioButton crianzaRadioButton;
     private javax.swing.JButton guardarButton;
     private javax.swing.JRadioButton hembraRadioButton;
     private javax.swing.JLabel jLabel1;
@@ -209,11 +237,14 @@ public class AltaPalomaPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JRadioButton machoRadioButton;
     private com.toedter.calendar.JDateChooser nacimientoDateChooser;
     private javax.swing.JTextField nombreTextField;
     private javax.swing.JTextArea observacionesTextArea;
+    private javax.swing.ButtonGroup tipoButtonGroup;
+    private javax.swing.JRadioButton vueloRadioButton;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,6 +5,7 @@
 package GUI;
 
 import Controller.PalomaController;
+import Controller.ParejaController;
 import Domain.Paloma;
 import java.util.List;
 import javax.swing.JDialog;
@@ -25,10 +26,10 @@ public class MainMenu extends javax.swing.JFrame {
     public MainMenu() {
         initComponents();
         setLocationRelativeTo(null);
-//        List<Paloma> palomasList = PalomaController.getPalomas();
-//        for(Paloma p : palomasList){
-//            System.out.println("------ \n" + p + "\n ------");
-//        }
+        List<Paloma> parejasList = ParejaController.getParejasList(1);
+        for(Paloma p : parejasList){
+            System.out.println("PAREJA_PALOMA: " + p.toString());
+        }
 
     }
 
@@ -138,7 +139,7 @@ public class MainMenu extends javax.swing.JFrame {
                 dialog.setLocationRelativeTo(this);
                 dialog.setVisible(true);
             } else {
-                JOptionPane.showMessageDialog(this, "No se encontró la paloma con esa anilla.");
+                JOptionPane.showMessageDialog(this, "EL NÚMERO DE ANILLA INTRODUCIDO NO EXISTE EN LA BASE DE DATOS.");
             }
         }
     }//GEN-LAST:event_buscarButtonActionPerformed
