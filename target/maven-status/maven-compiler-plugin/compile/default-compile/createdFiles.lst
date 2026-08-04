@@ -16,6 +16,7 @@ GUI\ListaPalomasDialog$1.class
 GUI\AltaPalomaPanel$1.class
 Controller\ParejaController.class
 GUI\MainMenu$3.class
+GUI\PalomaDetallePanel$5.class
 DAO\PalomaDAO.class
 GUI\MainMenu$4.class
 Domain\PalomaTableModel.class
@@ -24,6 +25,7 @@ GUI\ListaPalomasDialog$2.class
 GUI\PalomaDetallePanel.class
 Domain\ParejaPaloma.class
 GUI\MainMenu$2.class
+GUI\PalomaDetallePanel$4.class
 GUI\PalomaDetallePanel$1.class
 GUI\AltaPalomaPanel.class
 Domain\Paloma.class

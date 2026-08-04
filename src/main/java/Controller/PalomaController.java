@@ -6,13 +6,13 @@ package Controller;
 
 import DAO.PalomaDAO;
 import Domain.Paloma;
-import Domain.Pareja;
+import java.util.ArrayList;
 import java.util.List;
 /**
  *
  * @author Carlos
  */
-public class PalomaController {
+public class PalomaController{
     
     // Obtener todas las palomas de la BD
     public static List<Paloma> getPalomasList(){
@@ -39,13 +39,27 @@ public class PalomaController {
         return PalomaDAO.modifyPaloma(paloma);
     }
     
-    // Método para comporbar género de la paloma
-   public static boolean getGenre(Paloma paloma){
+    // Filtrar Paloma por pareja
+    public static List<Paloma> filtrarParejas(int idPaloma){
+        
+        List<Paloma> parejasList = new ArrayList<>();
+        
+        
+        return parejasList;
+    }
+    
+    // Método para recorrer lista de palomas
+    public static List<Paloma> recorrerPalomasList(List<Paloma> palomasList){
+        
+        for(Paloma p : palomasList){
+          
+        }
+        
+        return palomasList;
+    }
+    
+    // Método para comprobar género de la paloma
+    public static boolean getGenre(Paloma paloma){
        return paloma.getSexo() == 'M'; // Devuelve "True" si es macho, "False" si es hembra
-   }
-   
-   // Obtener última pareja
-   public static Paloma getLastPareja(Pareja pareja){
-       return null;
    }
 }

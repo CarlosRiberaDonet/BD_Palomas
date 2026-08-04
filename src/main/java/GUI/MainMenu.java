@@ -5,9 +5,7 @@
 package GUI;
 
 import Controller.PalomaController;
-import Controller.ParejaController;
 import Domain.Paloma;
-import java.util.List;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -26,11 +24,6 @@ public class MainMenu extends javax.swing.JFrame {
     public MainMenu() {
         initComponents();
         setLocationRelativeTo(null);
-        List<Paloma> parejasList = ParejaController.getParejasList(1);
-        for(Paloma p : parejasList){
-            System.out.println("PAREJA_PALOMA: " + p.toString());
-        }
-
     }
 
     /**
@@ -145,9 +138,14 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_buscarButtonActionPerformed
 
     private void listarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listarButtonActionPerformed
-        ListaPalomasDialog dialog = new ListaPalomasDialog(this, true); // this = frame principal, true = modal
-        dialog.setLocationRelativeTo(this); // centra el dialog sobre el frame
-        dialog.setVisible(true); // muestra el dialog
+        
+        if(PalomaController.getPalomasList() != null){
+           ListaPalomasDialog dialog = new ListaPalomasDialog(this, true, 0); // this = frame principal, true = modal, true = listar todas
+           dialog.setLocationRelativeTo(this); // centra el dialog sobre el frame
+           dialog.setVisible(true); // muestra el dialog
+        } else{
+            JOptionPane.showMessageDialog(this, "NO HAY PALOMAS EN LA BASE DE DATOS.");
+        }
     }//GEN-LAST:event_listarButtonActionPerformed
 
     /**

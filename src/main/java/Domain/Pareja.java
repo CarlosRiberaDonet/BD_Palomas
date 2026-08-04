@@ -13,6 +13,8 @@ import java.time.LocalDate;
 public class Pareja {
     
     private int idPareja;
+    private String anillaMacho;
+    private String anillaHembra;
     private LocalDate fechaUnion;
     private LocalDate fechaSeparacion;
     
@@ -24,6 +26,22 @@ public class Pareja {
 
     public void setIdPareja(int idPareja) {
         this.idPareja = idPareja;
+    }
+
+    public String getAnillaMacho() {
+        return anillaMacho;
+    }
+
+    public void setAnillaMacho(String anillaMacho) {
+        this.anillaMacho = anillaMacho;
+    }
+
+    public String getAnillaHembra() {
+        return anillaHembra;
+    }
+
+    public void setAnillaHembra(String anillaHembra) {
+        this.anillaHembra = anillaHembra;
     }
 
     public LocalDate getFechaUnion() {

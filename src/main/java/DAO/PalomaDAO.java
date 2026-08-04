@@ -8,11 +8,9 @@ import Domain.Cria;
 import Domain.Paloma;
 import Domain.Pareja;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,28 +27,29 @@ public class PalomaDAO {
     
     private static final String DELETE_PALOMA = "DELETE FROM paloma WHERE id = ?";
     
-    private static final String MODIFY_PALOMA = "UPDATE paloma SET anilla = ?, nombre = ?, " +
-                                "nacimiento = ?, muerte = ?, sexo = ?, color = ?, observaciones = ? WHERE id = ?";
+    private static final String MODIFY_PALOMA = "UPDATE paloma SET nombre = ?, " +
+                                "nacimiento = ?, muerte = ?, sexo = ?, color = ?, observaciones = ?, tipo = ? WHERE id = ?";
     
-    private static final String SELECT_PALOMA_BY_ANILLA = "SELECT p.id, " +
+    private static final String SELECT_PALOMA_BY_ANILLA = 
+            "SELECT p.id, " +
             "p.anilla, " +
             "p.nombre, " +
-            "p.nacimiento, "+
+            "p.nacimiento, " +
             "p.muerte, " +
             "p.sexo, " +
             "p.color, " +
             "p.observaciones, " +
-            "pa.id as pareja_id, " +
+            "pa.id AS pareja_id, " +
+            "pa.anilla_macho, " +
+            "pa.anilla_hembra, " +
             "pa.fecha_union, " +
-            "pa.fecha_separacion," +
-            "pp.id_paloma, " +
-            "pp.id_pareja, " +
+            "pa.fecha_separacion, " +
             "c.id AS id_cria, " +
             "c.fecha_puesta, " +
-            "c.fecha_nacimiento AS nacimiento_cria " +
+            "c.fecha_nacimiento AS nacimiento_cria, " +
+            "c.anilla_cria " +
             "FROM paloma p " +
-            "LEFT JOIN pareja_paloma pp ON pp.id_paloma = p.id " +
-            "LEFT JOIN pareja pa ON pp.id_pareja = pa.id " +
+            "LEFT JOIN pareja pa ON (p.anilla = pa.anilla_macho OR p.anilla = pa.anilla_hembra) " +
             "LEFT JOIN cria c ON pa.id = c.id_pareja " +
             "WHERE p.anilla = ?";
     
@@ -81,6 +80,7 @@ public class PalomaDAO {
                 
                 palomasList.add(paloma);
             }
+            
             return palomasList;
             
         }catch(SQLException e){
@@ -90,6 +90,7 @@ public class PalomaDAO {
         
         return null;
     }
+    
     // Agregar nueva paloma a la BD
     public static boolean insertPaloma(Paloma paloma){
         
@@ -113,34 +114,42 @@ public class PalomaDAO {
     }
     
     // Modificar datos de una paloma
-    public static boolean modifyPaloma(Paloma paloma){
-        
-        try(Connection conn = ConexionBD.connectionPalomas(); PreparedStatement stmt = conn.prepareStatement(MODIFY_PALOMA)){
-            
-            stmt.setString(1, paloma.getAnilla());
-            stmt.setString(2, paloma.getNombre());
-            stmt.setDate(3, Date.valueOf(paloma.getNacimiento()));
-            if (paloma.getMuerte() != null) {
-                stmt.setDate(4, Date.valueOf(paloma.getMuerte()));
+    public static boolean modifyPaloma(Paloma paloma) {
+        try (Connection conn = ConexionBD.connectionPalomas(); 
+             PreparedStatement stmt = conn.prepareStatement(MODIFY_PALOMA)) {
+
+            // 1. nombre
+            stmt.setString(1, paloma.getNombre());
+
+            // 2. nacimiento
+            if (paloma.getNacimiento() != null) {
+                stmt.setDate(2, java.sql.Date.valueOf(paloma.getNacimiento()));
             } else {
-                stmt.setNull(4, Types.DATE);
+                stmt.setNull(2, java.sql.Types.DATE);
             }
 
-            stmt.setString(5, String.valueOf(paloma.getSexo()));
-            stmt.setString(6, paloma.getColor());
-            stmt.setString(7, paloma.getObservaciones());
-            stmt.setInt(8, paloma.getIdPaloma());
-            
-            int filasAfectadas = stmt.executeUpdate();
-            if(filasAfectadas > 0){
-                return true;
+            // 3. muerte
+            if (paloma.getMuerte() != null) {
+                stmt.setDate(3, java.sql.Date.valueOf(paloma.getMuerte()));
+            } else {
+                stmt.setNull(3, java.sql.Types.DATE);
             }
-            
-        }catch(SQLException e){
-            System.out.println("Error al modificar la paloma");
+
+            // 4. sexo, 5. color, 6. observaciones, 7. tipo
+            stmt.setString(4, String.valueOf(paloma.getSexo()));
+            stmt.setString(5, paloma.getColor());
+            stmt.setString(6, paloma.getObservaciones());
+            stmt.setBoolean(7, paloma.isTipo());
+
+            // 8. El ID para el WHERE (ahora es el índice 8)
+            stmt.setInt(8, paloma.getIdPaloma()); 
+
+            return stmt.executeUpdate() > 0;
+
+        } catch (SQLException e) {
             e.printStackTrace();
-        }  
-        return false;
+            return false;
+        }
     }
     
     // Eliminar paloma de la BD
@@ -159,7 +168,7 @@ public class PalomaDAO {
             return false;
         }
     }
-    
+
     // Obtener todos los datos de una paloma
     public static Paloma selectPaloma(String anilla){
         
@@ -189,8 +198,16 @@ public class PalomaDAO {
                 if(idPareja > 0){
                     Pareja pareja = new Pareja();
                     pareja.setIdPareja(rs.getInt("pareja_id"));
-                    pareja.setFechaUnion(rs.getDate("fecha_union").toLocalDate());
-                    pareja.setFechaSeparacion(rs.getDate("fecha_separacion").toLocalDate());
+                    java.sql.Date sqlUnion = rs.getDate("fecha_union");
+                    if (sqlUnion != null) {
+                        pareja.setFechaUnion(sqlUnion.toLocalDate());
+                    }
+                   java.sql.Date sqlSeparacion = rs.getDate("fecha_separacion");
+                    if (sqlSeparacion != null) {
+                        pareja.setFechaSeparacion(sqlSeparacion.toLocalDate());
+                    } else {
+                        pareja.setFechaSeparacion(null); // O simplemente no hacer nada si el default es null
+                    }
                     paloma.getParejaList().add(pareja);
                 }
                 

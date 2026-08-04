@@ -7,7 +7,6 @@ package GUI;
 import Controller.PalomaController;
 import Domain.Paloma;
 import Domain.PalomaTableModel;
-import Utils.Utils;
 import java.util.List;
 import javax.swing.JDialog;
 
@@ -20,18 +19,29 @@ public class ListaPalomasDialog extends javax.swing.JDialog {
     /**
      * Creates new form ListaPalomasDialog
      */
+    
+    private static int idPaloma; // Flag para saber si listo todas las palomas o Machos/Hembras
     private static List<Paloma> palomasList;
-    public ListaPalomasDialog(java.awt.Frame parent, boolean modal) {
+    
+    public ListaPalomasDialog(java.awt.Frame parent, boolean modal, int idPaloma) {
         super(parent, modal);
         initComponents();
-        cargarPalomas();
-        configurarTabla();
+        this.idPaloma = idPaloma;
+        cargarPalomas(idPaloma);
         configurarTabla();
         configurarListeners();
     }
     
-    private void cargarPalomas(){
-        palomasList = PalomaController.getPalomasList();
+    private void cargarPalomas(int idPaloma){
+        
+        // Carga todas las palomas de la BD
+        if(idPaloma == 0){
+            palomasList = PalomaController.getPalomasList();
+        }
+        // Carga las palomas filtradas
+        else{
+            PalomaController.filtrarParejas(idPaloma);
+        }    
     }
     
    private void configurarTabla() {
@@ -123,7 +133,7 @@ public class ListaPalomasDialog extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ListaPalomasDialog dialog = new ListaPalomasDialog(new javax.swing.JFrame(), true);
+                ListaPalomasDialog dialog = new ListaPalomasDialog(new javax.swing.JFrame(), true, idPaloma);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

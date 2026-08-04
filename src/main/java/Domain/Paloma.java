@@ -28,7 +28,7 @@ public class Paloma {
     
     // CONSTRUCTOR
 
-    public Paloma(int idPaloma, String anilla, String nombre, LocalDate nacimiento, LocalDate muerte, char sexo, String color, boolean tipo, String observaciones) {
+    public Paloma(int idPaloma, String nombre, LocalDate nacimiento, LocalDate muerte, char sexo, String color, boolean tipo, String observaciones) {
         this.idPaloma = idPaloma;
         this.anilla = anilla;
         this.nombre = nombre;
